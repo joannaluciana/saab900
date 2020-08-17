@@ -11,7 +11,7 @@ class CarsInline(admin.StackedInline):
 
 class CarAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'producent', 'car_class',
+    list_display = ('name', 'producent',
     'engine', 'transmission', 'airconditioning', 'length', 'width',
     'height', 'description' )
     def krotki_opis(self, obj):

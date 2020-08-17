@@ -19,7 +19,7 @@ class AdminProducentSerializer(serializers.ModelSerializer):
         ]
 
         lookup_field = 'slug'
-        extra_kwargs = {'url': {'lookup_field': 'slug'}}
+        # extra_kwargs = {"url": {"lookup_field": "slug"}}
 
 
 class ProducentSerializer(AdminProducentSerializer):
@@ -36,7 +36,6 @@ class AdminCarSerializer(serializers.ModelSerializer):
             'name',
             'producent',
             'production',
-            'car_class',
             'body_style',
             'engine',
             'transmission',
@@ -46,7 +45,7 @@ class AdminCarSerializer(serializers.ModelSerializer):
             'height',
             'user',
             'description',
-            # 'url',
+            'url',
         ]
 
 
@@ -68,7 +67,7 @@ class AdminPlaceSerializer(serializers.ModelSerializer):
             'name',
             'user',
             'description',
-            # 'url',
+            'url',
         ]
 
 
@@ -94,6 +93,7 @@ class AdminUserCarSerializer(serializers.ModelSerializer):
             'image_url',
             'description',
             # 'url',
+
         ]
 
 

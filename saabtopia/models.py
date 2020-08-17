@@ -75,14 +75,6 @@ class Car(NameDescriptionMixin, UserMixin, models.Model,):
         verbose_name="Production",
         help_text="",)
 
-    car_class = models.DecimalField(
-        decimal_places=3,
-        null=False,
-        max_digits=9,
-        blank=False,
-        verbose_name="length",
-        help_text="In milimeters",
-    )
     BODY_STYLE_CHOICES = [
         ("two-door", "Two-door"),
         ("convertiblee", "Convertible"),
@@ -116,11 +108,11 @@ class Car(NameDescriptionMixin, UserMixin, models.Model,):
         ("4 speed sensonic", "4 speed sensonic"),
     ]
     transmission = models.CharField(
-        max_length=10,
-        choices=ENGINE_CHOICES,
+        max_length=18,
+        choices=TRANSMISSION_CHOICES,
         null=False,
         blank=False,
-        verbose_name="engine_style",
+        verbose_name="transmission",
         help_text="",
     )
 

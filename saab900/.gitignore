@@ -3,5 +3,4 @@ media/
 __pycache__
 *.sqlite3*
 notatki.txt
-settings.py
 .env

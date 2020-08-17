@@ -18,17 +18,59 @@ from .serializers import (
 
 
 class ProducentViewSet(viewsets.ModelViewSet):
-    queryset = Producent.objects.all()
-    serializer_class = ProducentSerializer
+
+    lookup_field = "slug"
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            # self.lookup_field='pk'
+            return AdminProducentSerializer
+        return ProducentSerializer
+
+    def get_queryset(self) :
+        if self.request.user.is_superuser:
+            return Producent.objects.all()
+        return Producent.objects.filter(user=self.request.user)
 
 class CarViewSet(viewsets.ModelViewSet):
-    queryset = Car.objects.all()
-    serializer_class = CarSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return AdminCarSerializer
+        return CarSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser :
+            return Car.objects.all()
+        return Car.objects.filter(user=self.request.user)
 
 class PlaceViewSet(viewsets.ModelViewSet):
-    queryset = Place.objects.all()
-    serializer_class = PlaceSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return AdminPlaceSerializer
+        return PlaceSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Place.objects.all()
+        return Place.objects.filter(user=self.request.user)
 
 class UserCarViewSet(viewsets.ModelViewSet):
-    queryset = UserCar.objects.all()
-    serializer_class = UserCarSerializer
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return AdminUserCarSerializer
+        return UserCarSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return UserCar.objects.all()
+        return UserCar.objects.filter(user=self.request.user)
+
+
+class ProfileRetrieveView(RetrieveAPIView):
+
+    def retrieve(self, request, pk = None):
+        User = get_user_model()
+        serializer = UserSerializer(User.objects.get(pk=request.user.pk))
+        return Response(serializer.data)
